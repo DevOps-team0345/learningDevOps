@@ -23,7 +23,7 @@ h1 {
 }
 
 .devops-card {
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -32,4 +32,25 @@ h1 {
 
 .devops-card h3 {
   margin: 0 0 0.5rem 0;
+}
+
+.card-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  color: #fff;
+  font-weight: 600;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+}
+
+.devops-card {
+  position: relative;
+  overflow: hidden;
 }
