@@ -10,7 +10,7 @@ const sampleEngineers = [
 export default function DevOpsList() {
   return (
     <section>
-      <h2>DevOps Team</h2>
+      <h2>DevOps Team afzal umar kashif</h2>
       <div className="devops-list">
         {sampleEngineers.map(e => (
           <DevOpsCard key={e.name} engineer={e} />
