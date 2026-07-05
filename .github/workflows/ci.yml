@@ -1,4 +1,5 @@
-name: CI Workflow
+
+name: CI/CD Pipeline
 
 on:
   push:
@@ -10,12 +11,54 @@ on:
       - main
 
 jobs:
-  build:
+  ci:
+    name: Continuous Integration
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Print Message
-        run: echo "GitHub Actions is working!"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Project
+        run: npm run build
+
+  cd:
+    name: Continuous Deployment
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          echo "Add real deployment here (Vercel / AWS / Render / EC2)"
