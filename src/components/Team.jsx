@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import TeamPopup from './TeamPopup'
-import OwnerCard from './OwnerCard'
-import TeamCard from './TeamCard'
+import FounderCard from './FounderCard'
+import MemberCard from './MemberCard'
+import TeamHero from './TeamHero'
+import TechStack from './TechStack'
+import ProjectShowcase from './ProjectShowcase'
 
 const teamMembers = [
   {
@@ -62,21 +65,32 @@ export default function Team() {
   return (
     <section className="team-section">
       <TeamPopup visible={isPopupVisible} onClose={() => setIsPopupVisible(false)} />
+      <TeamHero />
 
-      <div className="section-heading">
-        <p className="eyebrow">Premium DevOps Portfolio</p>
-        <h1>Learning DevOps Team</h1>
-        <p className="section-copy">
-          A modern developer collective focused on automation, infrastructure, cloud delivery, and reliable product development.
-        </p>
+      <div className="section-block premium-block">
+        <div className="section-label">Founder Experience</div>
+        <FounderCard person={teamMembers[0]} />
       </div>
 
-      <div className="team-grid">
-        <OwnerCard person={teamMembers[0]} />
-        {teamMembers.slice(1).map((person) => (
-          <TeamCard key={person.name} person={person} />
-        ))}
+      <div className="section-block premium-block">
+        <div className="section-label">Team Experience</div>
+        <div className="member-grid">
+          {teamMembers.slice(1).map((person) => (
+            <MemberCard key={person.name} person={person} />
+          ))}
+        </div>
       </div>
+
+      <div className="section-block premium-block">
+        <div className="section-label">Team Vision</div>
+        <div className="vision-card">
+          <h3>Learning, Building and Deploying Modern Software</h3>
+          <p>We combine engineering discipline, cloud-native thinking, and product-focused execution to ship dependable experiences.</p>
+        </div>
+      </div>
+
+      <TechStack />
+      <ProjectShowcase projects={[...teamMembers[0].projects, ...teamMembers[1].projects, ...teamMembers[2].projects]} />
     </section>
   )
 }
