@@ -18,3 +18,13 @@ Build:
 npm run build
 npm run preview
 ```
+
+## Docker
+
+```bash
+cp .env.example .env
+docker compose build
+docker compose up
+```
+
+The app will be available on http://localhost:3000.

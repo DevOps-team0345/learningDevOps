@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_APP_TITLE: ${VITE_APP_TITLE:-Learning DevOps}
+    image: learningdevops-app:latest
+    container_name: learningdevops-app
+    ports:
+      - "${APP_PORT:-3000}:80"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
