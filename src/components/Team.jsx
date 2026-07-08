@@ -1,90 +1,82 @@
 import React, { useEffect, useState } from 'react'
+import TeamPopup from './TeamPopup'
+import OwnerCard from './OwnerCard'
+import TeamCard from './TeamCard'
 
 const teamMembers = [
   {
     name: 'Kashif Akram',
-    role: 'Owner',
-    bio: 'Leads the learning journey with a focus on automation, CI/CD, and cloud delivery.',
-    skills: ['CI/CD', 'Docker', 'GitHub Actions', 'Vercel', 'Linux'],
+    role: 'Founder & Owner',
+    initials: 'KA',
+    linkedin: 'https://www.linkedin.com/in/kashif-akram-834569301/',
     github: 'https://github.com/KashifAkram0345',
-    linkedin: 'https://www.linkedin.com',
-    contact: '+92-XXX-XXXXXXX'
+    contact: '03120746833',
+    skills: ['React', 'JavaScript', 'Node.js', 'CI/CD', 'Docker', 'Vercel', 'Linux'],
+    technologies: ['GitHub Actions', 'Tailwind', 'Vite', 'Nginx', 'Cloud Deployments'],
+    projects: [
+      { name: 'kashif-portfolio', description: 'Personal portfolio experience', url: 'https://github.com/KashifAkram0345/kashif-portfolio' },
+      { name: 'kashif-tech', description: 'Technology learning and showcase', url: 'https://github.com/KashifAkram0345/kashif-tech' },
+      { name: 'computer-_10', description: 'Developer workspace experiments', url: 'https://github.com/KashifAkram0345/computer-_10' }
+    ]
   },
   {
-    name: 'Afzal Pervaiz',
-    role: 'Team Member',
-    bio: 'Builds reliable pipelines and practical DevOps workflows for modern applications.',
-    skills: ['Kubernetes', 'Terraform', 'Monitoring', 'Shell Scripting'],
-    github: 'https://github.com/afzalpervaiz1474-cmd',
-    linkedin: 'https://www.linkedin.com',
-    contact: '+92-XXX-XXXXXXX'
-  },
-  {
-    name: 'Muhammad Umar',
-    role: 'Team Member',
-    bio: 'Contributes to system automation, deployment practices, and infrastructure learning.',
-    skills: ['AWS', 'Ansible', 'Networking', 'Cloud Basics'],
+    name: 'Umar',
+    role: 'DevOps Team Member',
+    initials: 'UM',
+    linkedin: 'https://www.linkedin.com/in/ch-umar-94713018a/',
     github: 'https://github.com/muhammadumarcs307',
+    contact: '03148426875',
+    skills: ['Git', 'Linux', 'Automation', 'Cloud Basics', 'Docker', 'CI/CD'],
+    technologies: ['GitHub', 'AWS', 'Ansible', 'Shell Scripting', 'Containers'],
+    projects: [
+      { name: 'git-learning-lab', description: 'Git and workflow practice', url: 'https://github.com/muhammadumarcs307/git-learning-lab' },
+      { name: 'learningWithKashif', description: 'Learning collaboration repository', url: 'https://github.com/muhammadumarcs307/learningWithKashif' },
+      { name: 'muhammadumarcs307', description: 'Developer profile repository', url: 'https://github.com/muhammadumarcs307/muhammadumarcs307' }
+    ]
+  },
+  {
+    name: 'Afzal',
+    role: 'DevOps Team Member',
+    initials: 'AF',
     linkedin: 'https://www.linkedin.com',
-    contact: '+92-XXX-XXXXXXX'
+    github: 'https://github.com/afzalpervaiz1474-cmd',
+    contact: '03147452373',
+    skills: ['Backend', 'Git', 'Linux', 'Deployment', 'APIs', 'DevOps'],
+    technologies: ['Node.js', 'Express', 'MongoDB', 'Docker', 'GitHub'],
+    projects: [
+      { name: 'Afzal-porfolio', description: 'Portfolio project', url: 'https://github.com/afzalpervaiz1474-cmd/Afzal-porfolio' },
+      { name: 'Afzal-store', description: 'Store application project', url: 'https://github.com/afzalpervaiz1474-cmd/Afzal-store' },
+      { name: 'BACKENDWORK', description: 'Backend development practice', url: 'https://github.com/afzalpervaiz1474-cmd/BACKENDWORK' }
+    ]
   }
 ]
 
 export default function Team() {
-  const [isModalOpen, setIsModalOpen] = useState(true)
+  const [isPopupVisible, setIsPopupVisible] = useState(true)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsModalOpen(false), 4500)
+    const timer = window.setTimeout(() => setIsPopupVisible(false), 4200)
     return () => window.clearTimeout(timer)
   }, [])
 
   return (
-    <div className="team-shell">
-      {isModalOpen && (
-        <div className="welcome-modal" role="dialog" aria-modal="true">
-          <div className="modal-badge">DevOps Portfolio</div>
-          <h2>Learning DevOps Team</h2>
-          <p>We combine automation, cloud practices, and modern delivery pipelines to build dependable systems.</p>
-          <button type="button" onClick={() => setIsModalOpen(false)}>
-            Explore Team
-          </button>
-        </div>
-      )}
+    <section className="team-section">
+      <TeamPopup visible={isPopupVisible} onClose={() => setIsPopupVisible(false)} />
 
-      <section className="team-hero">
-        <div className="hero-copy">
-          <p className="eyebrow">Professional DevOps Learning Studio</p>
-          <h1>Building reliable delivery pipelines with clarity and confidence.</h1>
-          <p className="hero-text">
-            Our team focuses on containerization, CI/CD, GitHub automation, and cloud-ready application delivery.
-          </p>
-        </div>
+      <div className="section-heading">
+        <p className="eyebrow">Premium DevOps Portfolio</p>
+        <h1>Learning DevOps Team</h1>
+        <p className="section-copy">
+          A modern developer collective focused on automation, infrastructure, cloud delivery, and reliable product development.
+        </p>
+      </div>
 
-        <div className="team-grid">
-          {teamMembers.map((member) => (
-            <article className="team-card" key={member.name}>
-              <div className="card-top">
-                <span className="card-role">{member.role}</span>
-                <span className="card-flag">Active</span>
-              </div>
-              <h3>{member.name}</h3>
-              <p className="card-bio">{member.bio}</p>
-
-              <div className="skills-wrap">
-                {member.skills.map((skill) => (
-                  <span className="skill-pill" key={skill}>{skill}</span>
-                ))}
-              </div>
-
-              <div className="card-links">
-                <a href={member.github} target="_blank" rel="noreferrer">GitHub</a>
-                <a href={member.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-                <a href={`tel:${member.contact}`}>Contact</a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </div>
+      <div className="team-grid">
+        <OwnerCard person={teamMembers[0]} />
+        {teamMembers.slice(1).map((person) => (
+          <TeamCard key={person.name} person={person} />
+        ))}
+      </div>
+    </section>
   )
 }
